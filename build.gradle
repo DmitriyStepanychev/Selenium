@@ -19,6 +19,8 @@ dependencies {
     testImplementation 'com.codeborne:selenide:6.13.0'
 //    testImplementation 'org.seleniumhq.selenium:selenium-devtools-v86:4.0.0-beta-2'
     testImplementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.8.3'
+    testImplementation 'org.seleniumhq.selenium:selenium-remote-driver:4.8.3'
+
 
 }
 
