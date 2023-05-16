@@ -19,16 +19,18 @@ class ChromeTest {
     WebDriver driver;
 
     @BeforeAll
-    static void setupAll(){}
+    static void setupAll(){
+        WebDriverManager.chromedriver().setup();
+    }
 
     @BeforeEach
     void setup() {
-        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
+        driver.get("http://localhost:9999");
     }
 
     @AfterEach
@@ -39,7 +41,6 @@ class ChromeTest {
 
     @Test
     void testShouldFinishSuccess() {
-        driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79213303030");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
@@ -52,7 +53,6 @@ class ChromeTest {
 
     @Test
     void testWithoutClickAgreement() {
-        driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79213303030");
         driver.findElement(By.className("button")).click();
@@ -64,7 +64,6 @@ class ChromeTest {
 
     @Test
     void testWithNotCyrillicName() {
-        driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Ivanov Ivan");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79213303030");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
@@ -77,7 +76,6 @@ class ChromeTest {
 
     @Test
     void testWithLongPhoneNumber() {
-        driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+792133030301");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
@@ -90,7 +88,6 @@ class ChromeTest {
 
     @Test
     void testWithEmptyNameField() {
-        driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79213303030");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
@@ -103,7 +100,6 @@ class ChromeTest {
 
     @Test
     void testWithEmptyPhoneField() {
-        driver.get("http://localhost:9999");
         driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван");
         driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("");
         driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
